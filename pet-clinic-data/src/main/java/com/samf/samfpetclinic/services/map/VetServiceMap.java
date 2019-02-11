@@ -1,11 +1,11 @@
 package com.samf.samfpetclinic.services.map;
 
 import com.samf.samfpetclinic.model.Vet;
-import com.samf.samfpetclinic.services.CrudService;
+import com.samf.samfpetclinic.services.VetService;
 
 import java.util.Set;
 
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
 
 
     @Override

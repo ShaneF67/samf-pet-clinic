@@ -2,9 +2,11 @@ package com.samf.samfpetclinic.services.map;
 
 import com.samf.samfpetclinic.model.Owner;
 import com.samf.samfpetclinic.services.OwnerService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
 

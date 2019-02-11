@@ -5,7 +5,25 @@
     <title>List of Owners</title>
 </head>
 <body>
-
+<!--/*@thymesVar id="owner" type="com.samf.samfpetclinic.model.Owner"*/-->
 <h1 th:text="'Owners'">Owners</h1>
+
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="owner : ${owners}">
+        <td th:text="${owner.id}"></td>
+        <td th:text="${owner.firstName}"></td>
+        <td th:text="${owner.lastName}"></td>
+    </tr>
+
+    </tbody>
+</table>
 </body>
 </html>

@@ -1,14 +1,13 @@
 package com.samf.samfpetclinic.services.map;
 
 import com.samf.samfpetclinic.model.Visit;
-import com.samf.samfpetclinic.repositories.VisitRepository;
 import com.samf.samfpetclinic.services.VisitService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class VisitMapService extends AbstractMapService<Visit, Long> implements VisitService {
-
-    private VisitRepository visitRepository;
 
     @Override
     public Set<Visit> findAll() {

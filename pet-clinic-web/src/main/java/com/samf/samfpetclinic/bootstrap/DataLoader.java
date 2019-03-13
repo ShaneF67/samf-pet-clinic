@@ -1,10 +1,7 @@
 package com.samf.samfpetclinic.bootstrap;
 
 import com.samf.samfpetclinic.model.*;
-import com.samf.samfpetclinic.services.OwnerService;
-import com.samf.samfpetclinic.services.PetTypeService;
-import com.samf.samfpetclinic.services.SpecialtyService;
-import com.samf.samfpetclinic.services.VetService;
+import com.samf.samfpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +14,14 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -88,6 +87,11 @@ public class DataLoader implements CommandLineRunner {
         owner2.getPets().add(iansPet);
 
         ownerService.save(owner2);
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(iansPet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sick Cat");
 
         System.out.println("Set owners......");
 

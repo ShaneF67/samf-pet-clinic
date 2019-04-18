@@ -8,7 +8,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OwnerServiceMapTest {
+class OwnerMapServiceTest {
 
     private OwnerMapService ownerServiceMap;
     private final Long ownerId = 1L;

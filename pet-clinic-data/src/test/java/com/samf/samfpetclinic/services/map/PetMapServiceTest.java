@@ -13,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class PetMapServiceTest {
 
     private PetMapService petMapService;
-    private Long id = 1L;
-    private String petName = "Mimzy";
-    private LocalDate dateOfBirth = LocalDate.now();
+    private final Long id = 1L;
+    private final String petName = "Mimzy";
+    private final LocalDate dateOfBirth = LocalDate.now();
     private PetType petType = new PetType("Dog");
     private Pet petUnderTest;
 

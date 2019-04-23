@@ -42,17 +42,17 @@ public class OwnersController {
             owner.setLastName("");
         }
 
-        List<Owner> results = ownerService.findAllByLastNameLike(owner.getLastName());
+        List<Owner> results = ownerService.findAllByLastNameLike("%" + owner.getLastName() + "%");
 
         if (results.isEmpty()) {
-            result.rejectValue("lastName", "notFound", "notFound");
-            return "/owners/findOwners";
+            result.rejectValue("lastName", "notFound", "Not Found");
+            return "owners/findOwners";
         } else if (results.size() == 1) {
             owner = results.get(0);
             return "redirect:/owners/" + owner.getId();
         } else {
             model.addAttribute("selections", results);
-            return "/owners/ownersList";
+            return "owners/ownersList";
         }
     }
 

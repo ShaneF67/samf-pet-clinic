@@ -32,7 +32,7 @@ public class OwnersController {
     @RequestMapping("/find")
     public String findOwners(Model model) {
         model.addAttribute("owner", Owner.builder().build());
-        return "owners/findOwners";
+        return "/owners/findOwners";
     }
 
     @GetMapping
@@ -46,20 +46,19 @@ public class OwnersController {
 
         if (results.isEmpty()) {
             result.rejectValue("lastName", "notFound", "notFound");
-            return "owners/findOwners";
+            return "/owners/findOwners";
         } else if (results.size() == 1) {
             owner = results.get(0);
             return "redirect:/owners/" + owner.getId();
         } else {
             model.addAttribute("selections", results);
-            return "owners/ownersList";
+            return "/owners/ownersList";
         }
     }
 
-
     @GetMapping("/{ownerId}")
     public ModelAndView showOwner(@PathVariable("ownerId") Long ownerId) {
-        ModelAndView modelAndView = new ModelAndView("owners/ownerDetails");
+        ModelAndView modelAndView = new ModelAndView("/owners/ownerDetails");
         modelAndView.addObject(this.ownerService.findById(ownerId));
         return modelAndView;
     }

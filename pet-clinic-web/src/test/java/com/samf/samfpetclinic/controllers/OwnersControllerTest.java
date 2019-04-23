@@ -14,8 +14,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -58,7 +60,8 @@ class OwnersControllerTest {
         mockMvc.perform(get("/owners/index"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("owners/index"))
-                .andExpect(model().attributeExists("owners"));
+                .andExpect(model().attributeExists("owners"))
+                .andExpect(model().attribute("owners", hasSize(2)));
 
         verifyZeroInteractions(ownerService);
     }
@@ -67,8 +70,21 @@ class OwnersControllerTest {
     void findOwners() throws Exception {
         mockMvc.perform(get("/owners/find"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("notimplemented"));
+                .andExpect(view().name("/owners/findOwner"))
+                .andExpect(model().attributeExists("owner"));
 
         verifyZeroInteractions(ownerService);
+    }
+
+    @Test
+    void findOwnerById() throws Exception {
+        when(ownerService.findById(firstOwnerId)).thenReturn(firstOwner);
+
+        mockMvc.perform(get("/owners/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/ownerDetails"))
+                .andExpect(model().attribute("owner", hasProperty("id", is(firstOwnerId))));
+
+        verify(ownerService, times(1)).findById(firstOwnerId);
     }
 }

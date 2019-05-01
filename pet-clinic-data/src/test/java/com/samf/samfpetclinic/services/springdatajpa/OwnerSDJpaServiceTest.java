@@ -85,18 +85,18 @@ class OwnerSDJpaServiceTest {
         assertNotNull(savedOwner);
         assertEquals(ownerId, savedOwner.getId());
         assertEquals(LAST_NAME, savedOwner.getLastName());
-        verify(ownerRepository).save(any());
+        verify(ownerRepository).save(any(Owner.class));
     }
 
     @Test
     void delete() {
         service.delete(builtOwner);
-        verify(ownerRepository, times(1)).delete(any());
+        verify(ownerRepository, times(1)).delete(any(Owner.class));
     }
 
     @Test
     void deleteById() {
         service.deleteById(ownerId);
-        verify(ownerRepository, times(1)).deleteById(any());
+        verify(ownerRepository, times(1)).deleteById(anyLong());
     }
 }

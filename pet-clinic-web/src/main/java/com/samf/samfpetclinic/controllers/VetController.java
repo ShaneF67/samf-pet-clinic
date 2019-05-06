@@ -1,12 +1,16 @@
 package com.samf.samfpetclinic.controllers;
 
+import com.samf.samfpetclinic.model.Vet;
 import com.samf.samfpetclinic.services.VetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Set;
 
 @Controller
-@RequestMapping("/vets")
 public class VetController {
 
     private final VetService vetService;
@@ -15,11 +19,17 @@ public class VetController {
         this.vetService = vetService;
     }
 
-    @RequestMapping({"", "/index", "/vets", "/vets.html"})
+    @RequestMapping({"/vets/index", "/vets/index.html", "/vets", "/vets.html"})
     public String listVets(Model model) {
 
         model.addAttribute("vets", vetService.findAll());
 
         return "vets/index";
+    }
+
+    @GetMapping("/api/vets")
+    public @ResponseBody
+    Set<Vet> getVets() {
+        return vetService.findAll();
     }
 }
